@@ -6,6 +6,10 @@ body { height: 100%; margin: 0; padding: 0; overflow: hidden; }
   text-align: center;
 }
 
+#result_items ul li {
+  list-style-type: none;
+}
+
 #results {
   margin-left: 66%;
   width: 33%;

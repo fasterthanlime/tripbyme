@@ -5,8 +5,22 @@ function fsq_search(latLng, map) {
   var url = "https://api.foursquare.com/v2/venues/search?ll=" + latLng.toUrlValue() + "&client_id=" + client_id + "&client_secret=" + client_secret
   
   $.getJSON(url, function(data) {
-      var items = data["response"]["groups"][0]["items"];
-      $("#results_count").html(items.size() + " results");
+      var items = data.response.groups[0].items;
+      $("#result_count").html(items.length + " results");
+      
+      list = $("#result_items ul");
+      list.html("");
+      
+      for(var i in items) {
+        if(items.hasOwnProperty(i)) {
+          var item = items[i];
+          var img_url = "/images/unknown-place-icon.png";
+          if(item.categories.hasOwnProperty(0)) {
+              img_url = item.categories[0].icon;
+          }
+          list.append("<li><h2><img src='" + img_url + "'> " + item.name + "</h2></li>");
+        }
+      }
   });
 }
 

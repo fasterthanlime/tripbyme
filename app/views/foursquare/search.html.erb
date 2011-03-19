@@ -20,20 +20,6 @@
     
     var markers = new Array();
     
-    <% @items.take(@count).each do |item| %>
-    markers["<%= item["id"] %>"] = new google.maps.Marker({
-        position: new google.maps.LatLng(<%= item["location"]["lat"] %>,
-          <%= item["location"]["lng"] %>),
-        map: map,
-        title: "<%= item["name"] %>",
-        <% if item["categories"].size > 0 %>
-            icon: "<%= item["categories"][0]["icon"] %>",
-        <% else %>
-            icon: "/images/unknown-place-icon.png",
-        <% end %>
-    });
-    <% end %>
-    
     var tourPlanCoordinates = [
       <% @items.take(@count).each do |item| %>
         new google.maps.LatLng(<%= item["location"]["lat"] %>, <%= item["location"]["lng"] %>),
@@ -62,22 +48,6 @@
     
     <div id="result_items">
     <ul>
-    <% @items.take(@count).each do |item| %>
-        <li>
-        <h2>
-          <% if item["categories"].size > 0 %>
-            <img class="category" src="<%= item["categories"][0]["icon"] %>">
-          <% end %>
-          <%= item["name"] %>
-        </h2>
-        <!--
-        <p> <%= item["stats"]["checkinsCount"] %> </p>
-        -->
-        <!--
-          <%= item.to_s %>
-        -->
-        </li>
-    <% end %>
     </ul>
     </div>
   </div>
