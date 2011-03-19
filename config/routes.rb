@@ -1,5 +1,7 @@
 DemoApp::Application.routes.draw do
   get "foursquare/search"
+  root :to => "foursquare", :action => "search"
+
 
   resources :users
 
