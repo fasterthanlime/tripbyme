@@ -1,24 +1,26 @@
-<!DOCTYPE html>
-<html>
-<head>
+<% content_for :head do %>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/stylesheets/search.css">
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript" src="/javascripts/4sq_search.js"></script>
 <script type="text/javascript">
+  var markers = new Array();
+  
+  $(initialize);
+  
   function initialize() {
+    
     var latlng = new google.maps.LatLng(<%= @lat %>, <%= @lng %>);
     var myOptions = {
       zoom: 15,
       center: latlng,
       mapTypeId: google.maps.MapTypeId.SATELLITE,
-      mapTypeControl: false,
+      mapTypeControl: true,
       streetViewControl: false,
     };
     var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-    
-    var markers = new Array();
+  
     
     var tourPlanCoordinates = [
       <% @items.take(@count).each do |item| %>
@@ -39,8 +41,9 @@
     tour.setMap(map);
   }
 </script>
-</head>
-<body onload="initialize()">
+<% end %>
+
+<% content_for :body do %>
   <div id="results">
     <!-- <img style="position: absolute; bottom: 0; float: right;" src="/images/logo5.jpg"> -->
     
@@ -52,6 +55,4 @@
     </div>
   </div>
   <div class="map" id="map_container"><div id="map_canvas"></div></div>
-</body>
-</html>
-
+<% end %>
