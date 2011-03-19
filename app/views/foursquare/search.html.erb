@@ -45,7 +45,7 @@
     });
     
     google.maps.event.addListener(map, 'bounds_changed', function() {
-      var centerLatLng = map.getCenter();
+      fsq_search(map.getCenter(), map);
     });
 
     tour.setMap(map);
@@ -55,6 +55,8 @@
 <body onload="initialize()">
   <div id="results">
     <!-- <img style="position: absolute; bottom: 0; float: right;" src="/images/logo5.jpg"> -->
+    
+    <h2 id="results_count">0 results</h2>
     
     <ul>
     <% @items.take(@count).each do |item| %>
