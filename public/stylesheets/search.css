@@ -1,6 +1,6 @@
 * { margin: 0; padding: 0; }
 html { height: 100%; overflow-x: hidden; }
-body { height: 100%; margin: 0; padding: 0; }
+body { height: 100%; margin: 0; padding: 0; background-color: #111; }
 
 #timeline {
   color: #AAA;
@@ -20,13 +20,24 @@ body { height: 100%; margin: 0; padding: 0; }
   background-color: #444;
 }
 
-#result_count {
-  text-align: center;
+/* Search box */
+
+#search_container {
+  background: url('/images/fade-topdown-grey.png') repeat-x;
+  width: 34%;
+  position: fixed;
+  top: 70px;
+  padding-bottom: 80px
 }
 
-#result_items ul li {
-  list-style-type: none;
+#searchbox {
+  height: 100%;
+  width: 100%;
+  font-size: 2.0em;
+  margin: 3px;
 }
+
+/* Results */
 
 #results {
   background-color: #111;
@@ -35,19 +46,22 @@ body { height: 100%; margin: 0; padding: 0; }
   width: 34%;
   overflow-x: hidden;
   border-left: 2px solid #666;
-  padding-top: 5px;
 }
 
 #results h2 {
   font-size: 1.1em;
   font-family: Sans;
 }
-#results img {
+#results_items img {
   vertical-align: middle;
 }
-#results ul {
+
+#result_items ul {
+  margin-top: 50px;
 }
-#results li {
+
+#result_items ul li {
+  list-style-type: none;
   display: block;
   width: 100%;
   border-bottom: 1px solid #ddd;
