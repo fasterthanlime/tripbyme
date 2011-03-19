@@ -13,32 +13,20 @@
     
     var latlng = new google.maps.LatLng(<%= @lat %>, <%= @lng %>);
     var myOptions = {
-      zoom: 15,
+      zoom: 16,
       center: latlng,
       mapTypeId: google.maps.MapTypeId.SATELLITE,
       mapTypeControl: true,
       streetViewControl: false,
     };
     var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-  
     
-    var tourPlanCoordinates = [
-      <% @items.take(@count).each do |item| %>
-        new google.maps.LatLng(<%= item["location"]["lat"] %>, <%= item["location"]["lng"] %>),
-      <% end %>
-    ];
-    var tour = new google.maps.Polyline({
-      path: tourPlanCoordinates,
-      strokeColor: "#0033FF",
-      strokeOpacity: 0.7,
-      strokeWeight: 8
-    });
+    // debug: do it only once, for testing.
+    fsq_search(map.getCenter(), map);
     
     google.maps.event.addListener(map, 'bounds_changed', function() {
-      fsq_search(map.getCenter(), map);
+      //fsq_search(map.getCenter(), map);
     });
-
-    tour.setMap(map);
   }
 </script>
 <% end %>

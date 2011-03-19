@@ -11,6 +11,8 @@ function fsq_search(latLng, map) {
       list = $("#result_items ul");
       list.html("");
       
+      var tourPlanCoordinates = new Array();
+      
       for(var i in items) {
         if(items.hasOwnProperty(i)) {
           var item = items[i];
@@ -18,9 +20,31 @@ function fsq_search(latLng, map) {
           if(item.categories.hasOwnProperty(0)) {
               img_url = item.categories[0].icon;
           }
+          
+          var itemLocation = new google.maps.LatLng(item.location.lat, item.location.lng);
+          
+          // add item to item list
           list.append("<li><h2><img src='" + img_url + "'> " + item.name + "</h2></li>");
+          
+          // add marker on the map
+          markers[item.id] = new google.maps.Marker({
+              position: itemLocation,
+              map: map, 
+              title:"Hello World!"
+          });
+          
+          // add it to our tour (mostly for debug)
+          tourPlanCoordinates.push(itemLocation);
         }
       }
+      
+      var tour = new google.maps.Polyline({
+        path: tourPlanCoordinates,
+        strokeColor: "#0033FF",
+        strokeOpacity: 0.7,
+        strokeWeight: 8
+      });
+      tour.setMap(map);
   });
 }
 
