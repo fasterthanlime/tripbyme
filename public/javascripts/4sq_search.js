@@ -30,7 +30,8 @@ function fsq_search(latLng, map) {
           markers[item.id] = new google.maps.Marker({
               position: itemLocation,
               map: map, 
-              title:"Hello World!"
+              title:"Hello World!",
+              icon: img_url,
           });
           
           // add it to our tour (mostly for debug)
