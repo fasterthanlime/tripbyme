@@ -3,10 +3,11 @@ html { height: 100%; overflow: hidden; }
 body { height: 100%; margin: 0; padding: 0; overflow: hidden; }
 
 #results {
-  margin-left: 67%;
+  margin-left: 66%;
   width: 33%;
   height: 100%;
   overflow-x: hidden;
+  border-left: 4px solid #777;
 }
 #results h2 {
   font-size: 1.2em;

@@ -4,16 +4,13 @@ require 'json'
 
 class FoursquareController < ApplicationController
   def search
-    ## brooklyn
-    #@lat = 40.7
-    #@lng = -74
-    
-    ## lausanne
-    #@lat = 46.529816
-    #@lng = 6.630592
-    
-    @lat = params[:lat]
-    @lng = params[:lng]
+    if params[:lat] == nil then
+      @lat = 46.529816
+      @lng = 6.630592
+    else
+      @lat = params[:lat]
+      @lng = params[:lng]
+    end
     
     client_id     = "HMEWANYJXE0U5UDKIYWYAQLFWVABI4TBGMR3MATVJEFKOHZ0"
     client_secret = "5SQ0UEBC5THYYBDC3OBLGBW4LWPNF0SN3S4TT5JGHJJRNXQX"
