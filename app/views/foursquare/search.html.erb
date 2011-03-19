@@ -14,6 +14,16 @@
     height: 100%;
     overflow-x: hidden;
   }
+  #results h2 {
+    font-size: 1.2em;
+    font-style: bold;
+  }
+  #results img {
+    vertical-align: middle;
+  }
+  #results li {
+    margin: 0.5em 0;
+  }
   
   .map {
     width: 66%;
@@ -71,7 +81,7 @@
     });
     
     google.maps.event.addListener(map, 'bounds_changed', function() {
-      alert("Bounds changed!");
+      var centerLatLng = map.getCenter();
     });
 
     tour.setMap(map);
@@ -82,21 +92,24 @@
   <div id="results">
     <!-- <img style="position: absolute; bottom: 0; float: right;" src="/images/logo5.jpg"> -->
     
+    <ul>
     <% @items.take(@count).each do |item| %>
-      <p>
+        <li>
         <h2>
           <% if item["categories"].size > 0 %>
             <img class="category" src="<%= item["categories"][0]["icon"] %>">
           <% end %>
           <%= item["name"] %>
         </h2>
+        <!--
         <p> <%= item["stats"]["checkinsCount"] %> </p>
-        <p> <%= %> </p>
+        -->
         <!--
           <%= item.to_s %>
         -->
-      </p>
+        </li>
     <% end %>
+    </ul>
   </div>
   <div class="map" id="map_container"><div id="map_canvas"></div></div>
 </body>
