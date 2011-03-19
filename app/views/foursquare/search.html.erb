@@ -28,6 +28,8 @@
         title: "<%= item["name"] %>",
         <% if item["categories"].size > 0 %>
             icon: "<%= item["categories"][0]["icon"] %>",
+        <% else %>
+            icon: "/images/unknown-place-icon.png",
         <% end %>
     });
     <% end %>
