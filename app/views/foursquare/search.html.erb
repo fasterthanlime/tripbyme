@@ -48,20 +48,38 @@
   function initialize() {
     var latlng = new google.maps.LatLng(<%= @lat %>, <%= @lng %>);
     var myOptions = {
-      zoom: 14,
+      zoom: 15,
       center: latlng,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
     
+    var markers = new Array();
     <% @items.take(@count).each do |item| %>
-    new google.maps.Marker({
+    markers[<%= item %>] = new google.maps.Marker({
         position: new google.maps.LatLng(<%= item["location"]["lat"] %>,
           <%= item["location"]["lng"] %>),
         map: map,
         title: "<%= item["name"] %>",
+        <% if item["categories"].size > 0 %>
+            icon: "<%= item["categories"][0]["icon"] %>",
+        <% end %>
     });
     <% end %>
+    
+    var flightPlanCoordinates = [
+      <% @items.take(@count).each do |item| %>
+        new google.maps.LatLng(<%= item["location"]["lat"] %>, <%= item["location"]["lng"] %>),
+      <% end %>
+    ];
+    var flightPath = new google.maps.Polyline({
+      path: flightPlanCoordinates,
+      strokeColor: "#FF0000",
+      strokeOpacity: 0.7,
+      strokeWeight: 8
+    });
+
+    flightPath.setMap(map);
   }
 </script>
 </head>
@@ -72,7 +90,7 @@
         <li>
         <h2>
           <% if item["categories"].size > 0 %>
-            <img class="category" src="<%= item["categories"][0]["icon"].to_s %>">
+            <img class="category" src="<%= item["categories"][0]["icon"] %>">
           <% end %>
           <%= item["name"] %>
         </h2>
