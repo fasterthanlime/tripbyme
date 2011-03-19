@@ -1,4 +1,8 @@
 DemoApp::Application.routes.draw do
+  resources :events
+
+  resources :venues
+
   get "foursquare/search"
   root :to => "foursquare", :action => "search"
 
