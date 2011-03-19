@@ -11,6 +11,8 @@ gem 'httpclient'
 
 gem 'json'
 
+gem 'eventfulapi'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

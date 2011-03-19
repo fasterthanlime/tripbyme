@@ -1,4 +1,6 @@
 DemoApp::Application.routes.draw do
+  get "eventful/search"
+
   get "foursquare/search"
   root :to => "foursquare", :action => "search"
 
