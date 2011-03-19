@@ -5,6 +5,7 @@ require 'json'
 class FoursquareController < ApplicationController
   def search
     if params[:lat] == nil then
+      # Lausanne
       @lat = 46.529816
       @lng = 6.630592
     else

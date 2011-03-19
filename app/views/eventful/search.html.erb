@@ -1,2 +1,10 @@
-<h1>Eventful#search</h1>
-<p>Find me in app/views/eventful/search.html.erb</p>
+<% content_for :head do %>
+<title>tripbyme.ch</title>
+
+<% end %>
+
+<% content_for :body do %>
+<pre style="background-color: #BBB">
+  <%= @results %>
+</pre>
+<% end %>
