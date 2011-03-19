@@ -6,6 +6,9 @@ class CreateVenues < ActiveRecord::Migration
       t.float :lng
       t.string :foursquare_id
       t.string :eventful_id
+      t.string :gowalla_id
+      t.string :places_id
+      t.string :brightkite_id
 
       t.timestamps
     end
