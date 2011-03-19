@@ -17,8 +17,10 @@
     var myOptions = {
       zoom: 16,
       center: latlng,
-      mapTypeId: google.maps.MapTypeId.SATELLITE,
-      mapTypeControl: true,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      mapTypeControl: false,
+      panControl: false,
+      zoomControl: true,
       streetViewControl: false,
     };
     var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
@@ -34,10 +36,16 @@
 <% end %>
 
 <% content_for :body do %>
+  <div id="timeline">
+    <% (1..24).each do |i| %>
+    <% cl = (i % 2 == 0) ? "even" : "odd"; %>
+      <div class="hour <%=cl%>"></div>
+    <% end %>
+  </div>
+  
+  <div id="location">
   <div id="results">
     <!-- <img style="position: absolute; bottom: 0; float: right;" src="/images/logo5.jpg"> -->
-    
-    <h2 id="result_count">0 results</h2>
     
     <div id="result_items">
     <ul>
@@ -45,4 +53,5 @@
     </div>
   </div>
   <div class="map" id="map_container"><div id="map_canvas"></div></div>
+  </div>
 <% end %>

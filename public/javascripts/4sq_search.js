@@ -6,7 +6,6 @@ function fsq_search(latLng, map) {
   
   $.getJSON(url, function(data) {
       var items = data.response.groups[0].items;
-      $("#result_count").html(items.length + " results");
       
       list = $("#result_items ul");
       list.html("");
@@ -30,7 +29,7 @@ function fsq_search(latLng, map) {
           markers[item.id] = new google.maps.Marker({
               position: itemLocation,
               map: map, 
-              title:"Hello World!",
+              title: item.name,
               icon: img_url,
           });
           
@@ -45,7 +44,7 @@ function fsq_search(latLng, map) {
         strokeOpacity: 0.7,
         strokeWeight: 8
       });
-      tour.setMap(map);
+      //tour.setMap(map);
   });
 }
 
