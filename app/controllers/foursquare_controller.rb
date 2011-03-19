@@ -19,6 +19,5 @@ class FoursquareController < ApplicationController
     jsonObj = JSON.parse(clnt.get_content(url))
     @count = 10
     @items = jsonObj["response"]["groups"][0]["items"]
-    #@results = JSON.pretty_generate(jsonObj)
   end
 end
