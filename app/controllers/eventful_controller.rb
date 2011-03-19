@@ -20,14 +20,14 @@ class EventfulController < ApplicationController
                             :units => "km",
                             :page_size => 20,
                             :date => "future"
-           
+                            
     # Cache venue into DB :)
-    results.venues.each |item| do
+    results["venues"]["venue"].each do |item|
       venue = Venue.new(
-        :name => item.name
-        :lat => item.latitude
-        :lng => item.longitude
-        :eventful_id => item.id
+        :name => item["name"],
+        :lat => item["latitude"].to_f,
+        :lng => item["longitude"].to_f,
+        :eventful_id => item["id"]
       )
       venue.save
     end
