@@ -27,6 +27,7 @@ body { height: 100%; margin: 0; padding: 0; background-color: #111; }
   width: 34%;
   position: fixed;
   top: 70px;
+  right: 0px;
   padding-bottom: 80px
 }
 
@@ -53,7 +54,7 @@ body { height: 100%; margin: 0; padding: 0; background-color: #111; }
   font-size: 1.1em;
   font-family: Sans;
 }
-#results_items img {
+#result_items img {
   vertical-align: middle;
 }
 
