@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'eventful/api'
+require 'json'
 
 # Eventful request limits:
 #
@@ -10,14 +11,14 @@ require 'eventful/api'
 # Please contact bizdev@eventful.com for waivers to this rate limit.
 
 class EventfulController < ApplicationController
-  def search
-    if params[:lat] == nil then
+  ORIGIN = 'evdb'
+
+  def do_venues
+    if params[:location] == nil then
       # Lausanne
-      @lat = 46.529816
-      @lng = 6.630592
+      @lat, @lng = [46.529816, 6.630592]
     else
-      @lat = params[:lat]
-      @lng = params[:lng]
+      @lat, @lng = params["location"].split(',')
     end
 
     # Our secret API key
@@ -25,25 +26,48 @@ class EventfulController < ApplicationController
   
     results = eventful.call 'venues/search',
                             :location  => "#{@lat},#{@lng}",
-                            :within => 20,
+                            :within => 5,
                             :units => "km",
                             :page_size => 30,
                             :date => "future"
                             
-    # Cache venue into DB :)
+    items_added = 0
+                            
+    # Cache venues into DB :)
     results["venues"]["venue"].each do |item|
+      id = item["id"]
+      # is origin necessary here?
+      next if Venue.where("origin = 'evdb' AND eventful_id = ?", id).length > 0
+    
       venue = Venue.new(
+        :eventful_id => id,
+        :origin => "evdb",
         :name => item["name"],
         :description => item["description"],
         :lat => item["latitude"].to_f,
         :lng => item["longitude"].to_f,
-        :type => "evdb",
-        :eventful_id => item["id"]
+        :checkins_count => -1
       )
       venue.save
+      
+      items_added = items_added + 1
     end
-                            
-    @results = JSON.pretty_generate(results)
+    
+    return "Added #{items_added} items to the DB"
+  end
+
+  def venues
+    if params[:only_cache] != "1" then
+      do_venues
+    end
+    
+    result = []
+    
+    Venue.where("origin = ?", ORIGIN).each do |item|
+      result.push(item)
+    end
+    
+    render :json => result
   end
 
 end

@@ -3,9 +3,10 @@ DemoApp::Application.routes.draw do
   resources :events
   resources :venues
 
-  get "foursquare/search"
-  get "gowalla/search"
-  get "eventful/search"
+  get "foursquare/venues"
+  get "gowalla/venues"
+  get "eventful/venues"
+  get "eventful/events"
 
   root :to => "main", :action => "index"
 

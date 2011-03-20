@@ -2,10 +2,11 @@
 
 <table>
   <tr>
+    <th>Origin</th>
     <th>Name</th>
     <th>Lat</th>
     <th>Lng</th>
-    <th>Foursquare</th>
+    <th>Foursquare ID</th>
     <th>Eventful ID</th>
     <th>Gowalla ID</th>
     <th>Places ID</th>
@@ -18,6 +19,7 @@
 
 <% @venues.each do |venue| %>
   <tr>
+    <td><%= venue.origin %></td>
     <td><%= venue.name %></td>
     <td><%= venue.lat %></td>
     <td><%= venue.lng %></td>
