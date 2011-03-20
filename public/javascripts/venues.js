@@ -81,7 +81,8 @@ function do_request(url, map) {
           // add marker on the map
           if(markers[item.id] == null) {
             // add item to item list
-            list.append("<li id='venue_" + item.id + "'><h2><img src='" + img_url + "'> " + item.name +
+            list.append("<li class='venue' data-name='" + item.name + "' data-lat='" + item.lat + "' data-lng='" +
+              item.lng + "' id='venue_" + item.id + "'><h2><img src='" + img_url + "'> " + item.name +
             "<div class='plusminus'><input class='plus' type='button' value='+'></input><input class='minus' type='button' value='-'></input></div></h2></li>");
             
             markers[item.id] = new google.maps.Marker({
@@ -90,6 +91,7 @@ function do_request(url, map) {
                 title: item.name,
                 icon: img_url,
             });
+            
             google.maps.event.addListener(markers[item.id], 'click', (function(ourItem) {
               return function() {
                 var itemId = "li#venue_" + ourItem.id;
@@ -103,6 +105,12 @@ function do_request(url, map) {
                 updatePlusMinus();
               }
             })(item));
+            
+            $(".plus").click(function() {
+              var venue = $(this).closest(".venue");
+              var uri = generateCalendarURI(venue.attr("name"), 0, 0, venue.attr("data-lat"), venue.attr("data-lng"), "Enter your event here");
+              window.open(uri);
+            })
           }
           
           // add it to our tour (mostly for debug)
