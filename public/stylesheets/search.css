@@ -3,6 +3,7 @@ html { height: 100%; overflow: hidden; }
 body { height: 100%; margin: 0; padding: 0; background-color: #fff; font-family: Sans; }
 
 .plusminus {
+  visibility: hidden;
   float: right;
   right: 10px;
   margin-right: 20px;
@@ -13,6 +14,16 @@ body { height: 100%; margin: 0; padding: 0; background-color: #fff; font-family:
   width: 2em;
   height: 2em;
   font-size: 120%;
+}
+
+#selectable .ui-selecting {
+  background: silver;
+  color: white;
+}
+
+#selectable .ui-selected {
+  background: grey;
+  color: white;
 }
 
 #timeline {
