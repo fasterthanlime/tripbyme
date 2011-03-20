@@ -1,15 +1,24 @@
 * { margin: 0; padding: 0; }
 html { height: 100%; overflow-x: hidden; }
-body { height: 100%; margin: 0; padding: 0; background-color: #111; }
+body { height: 100%; margin: 0; padding: 0; background-color: #fff; }
 
 #timeline {
-  color: #aaa;
-  overflow-x: scroll;
-  overflow-y: hidden;
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  z-index: 2;
+  background-color: #fff;
+  height: 100px;
+  border-bottom: 2px solid #666;
 }
 
+
 #timeline_content {
-  width: 2000px;
+ /* width: 2000px;*/
+}
+
+#timeline img {
+    margin: 0 auto;
 }
 
 .hour {
@@ -23,10 +32,10 @@ body { height: 100%; margin: 0; padding: 0; background-color: #111; }
 /* Search box */
 
 #search_container {
-  background: url('/images/fade-topdown-grey.png') repeat-x 0px -10px;
+  /* background: url('/images/fade-topdown-grey.png') repeat-x 0px -10px;*/
   width: 34%;
   position: fixed;
-  top: 70px;
+  top: 100px;
   right: 0px;
   padding-bottom: 80px
 }
@@ -42,7 +51,7 @@ body { height: 100%; margin: 0; padding: 0; background-color: #111; }
 /* Results */
 
 #results {
-  background-color: #111;
+  background-color: #fff;
   color: #AAA;
   margin-left: 66%;
   width: 34%;
@@ -85,17 +94,7 @@ body { height: 100%; margin: 0; padding: 0; background-color: #111; }
 #map_container {
   position: fixed;
   left: 0px;
-  top: 70px;
-}
-
-#timeline {
-  width: 100%;
-  position: fixed;
-  top: 0px;
-  z-index: 2;
-  background-color: #333;
-  height: 70px;
-  border-bottom: 2px solid #666;
+  top: 100px;
 }
 
 #location {
