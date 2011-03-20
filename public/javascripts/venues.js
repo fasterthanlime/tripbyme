@@ -1,5 +1,5 @@
 
-function all_venues_search(latLng, map) {
+function all_venues_search(latLng, map, collect_data) {
   // remove old results and old map markers
   for(var i in markers) {
     if(markers.hasOwnProperty(i)) {
@@ -14,18 +14,31 @@ function all_venues_search(latLng, map) {
   providers = ["gowalla", "foursquare", "eventful"]
   for(var i in providers) {
     if(providers.hasOwnProperty(i)) {
-      venues_search(providers[i], latLng, map);
+      // do only with cache first
+      venues_search(providers[i], latLng, map, true);
     }
+  }
+  
+  if(collect_data) {
+    setTimeout(function() {
+      for(var i in providers) {
+        if(providers.hasOwnProperty(i)) {
+          // then do actual queries to the provider if needed (for additional info)
+          venues_search(providers[i], latLng, map, false);
+        }
+      }
+    }, 500);
   }
 }
 
-function venues_search(provider, latLng, map) {  
+function venues_search(provider, latLng, map, only_cache) {  
   var url = "/" + provider + "/venues?location=" + latLng.toUrlValue() +
     "&sw=" + map.getBounds().getSouthWest().toUrlValue() +
     "&ne=" + map.getBounds().getNorthEast().toUrlValue()
-  // do only with cache first
-  do_request(url + "&only_cache=1", map);
-  // then do actual queries to the provider if needed (for additional info)
+    
+  if(only_cache) {
+    url = url + "&only_cache=1";
+  }
   do_request(url, map);
 }
   
