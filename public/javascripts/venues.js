@@ -1,10 +1,18 @@
 
 function all_venues_search(latLng, map) {
-  console.log("Doing all_venues_search");
-  $("#result_items ul").html("");
+  // remove old results and old map markers
+  for(var i in markers) {
+    if(markers.hasOwnProperty(i)) {
+      if(!map.getBounds().contains(markers[i].getPosition())) {
+        markers[i].setMap(null);
+        markers.splice(i, 1);
+        $("#venue_" + i).remove();
+      }
+    }
+  }
   
   providers = ["gowalla", "foursquare", "eventful"]
-  for(i in providers) {
+  for(var i in providers) {
     if(providers.hasOwnProperty(i)) {
       venues_search(providers[i], latLng, map);
     }
@@ -12,7 +20,9 @@ function all_venues_search(latLng, map) {
 }
 
 function venues_search(provider, latLng, map) {  
-  var url = "/" + provider + "/venues?location=" + latLng.toUrlValue()
+  var url = "/" + provider + "/venues?location=" + latLng.toUrlValue() +
+    "&sw=" + map.getBounds().getSouthWest().toUrlValue() +
+    "&ne=" + map.getBounds().getNorthEast().toUrlValue()
   // do only with cache first
   do_request(url + "&only_cache=1", map);
   // then do actual queries to the provider if needed (for additional info)
@@ -25,7 +35,7 @@ function do_request(url, map) {
       
       list = $("#result_items ul");
       
-      var tourPlanCoordinates = new Array();
+      //var tourPlanCoordinates = new Array();
       
       for(var i in items) {
         if(items.hasOwnProperty(i)) {
@@ -41,28 +51,33 @@ function do_request(url, map) {
           var itemLocation = new google.maps.LatLng(item.lat, item.lng);
           
           // add item to item list
-          list.append("<li><h2><img src='" + img_url + "'> " + item.name + "</h2></li>");
+          list.append("<li id='venue_" + item.id + "'><h2><img src='" + img_url + "'> " + item.name + "</h2></li>");
           
           // add marker on the map
-          markers[item.id] = new google.maps.Marker({
-              position: itemLocation,
-              map: map, 
-              title: item.name,
-              icon: img_url,
-          });
+          if(markers[item.id] == null) {
+            markers[item.id] = new google.maps.Marker({
+                position: itemLocation,
+                map: map, 
+                title: item.name,
+                icon: img_url,
+            });
+          }
           
           // add it to our tour (mostly for debug)
-          tourPlanCoordinates.push(itemLocation);
+          //tourPlanCoordinates.push(itemLocation);
         }
       }
       
+      /*
+      // Polyline example code:
       var tour = new google.maps.Polyline({
         path: tourPlanCoordinates,
         strokeColor: "#0033FF",
         strokeOpacity: 0.7,
         strokeWeight: 8
       });
-      //tour.setMap(map);
+      tour.setMap(map);
+      */
   });
 }
 

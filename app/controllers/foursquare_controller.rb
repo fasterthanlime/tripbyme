@@ -57,9 +57,25 @@ class FoursquareController < ApplicationController
       do_venues
     end
     
+    if params[:location] == nil then
+      # Lausanne
+      @lat, @lng = [46.529816, 6.630592]
+    else
+      @lat, @lng = params[:location].split(',')
+    end
+    
+    if params[:sw] == nil then
+      epsilon = 0.01
+      sw_lat, sw_lng = [@lat.to_f - epsilon, @lng.to_f - epsilon]
+      ne_lat, ne_lng = [@lat.to_f + epsilon, @lng.to_f + epsilon]
+    else
+      sw_lat, sw_lng = params[:sw].split(',')
+      ne_lat, ne_lng = params[:ne].split(',')
+    end
+    
     result = []
     
-    Venue.where("origin = ?", ORIGIN).each do |item|
+    Venue.where("origin = ? AND lat > ? AND lng > ? AND lat < ? AND lng < ?", ORIGIN, sw_lat, sw_lng, ne_lat, ne_lng).each do |item|
       result.push(item)
     end
     
