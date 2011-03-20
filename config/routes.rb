@@ -1,4 +1,6 @@
 DemoApp::Application.routes.draw do
+  resources :categories
+
   get "gowalla/search"
 
   resources :events
