@@ -34,7 +34,13 @@ class FoursquareController < ApplicationController
       # is origin necessary here?
       id = item["id"]
       next if Venue.where("origin = ? AND foursquare_id = ?", ORIGIN, id).length > 0
-    
+      
+      icon_url = nil
+      if(item["categories"].length > 0) then
+        icon_url = item["categories"][0]["icon"]
+        puts "Got icon_url #{icon_url}"
+      end
+      
       venue = Venue.new(
         :origin => "4sq",
         :foursquare_id => id,
@@ -42,7 +48,8 @@ class FoursquareController < ApplicationController
         :description => item["description"],
         :lat => item["location"]["lat"].to_f,
         :lng => item["location"]["lng"].to_f,
-        :checkins_count => item["stats"]["checkinsCount"]
+        :checkins_count => item["stats"]["checkinsCount"],
+        :icon_url => icon_url
       )
       venue.save
       
