@@ -72,7 +72,8 @@ function do_request(url, map) {
           var itemLocation = new google.maps.LatLng(item.lat, item.lng);
           
           // add item to item list
-          list.append("<li id='venue_" + item.id + "'><h2><img src='" + img_url + "'> " + item.name + "</h2></li>");
+          list.append("<li id='venue_" + item.id + "'><h2><img src='" + img_url + "'> " + item.name +
+            "<div class='plusminus'><input type='button' value='+'></input><input type='button' value='-'></input></div></h2></li>");
           
           // add marker on the map
           if(markers[item.id] == null) {

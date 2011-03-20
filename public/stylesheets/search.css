@@ -2,6 +2,18 @@
 html { height: 100%; overflow-x: hidden; }
 body { height: 100%; margin: 0; padding: 0; background-color: #fff; }
 
+.plusminus {
+  float: right;
+  margin-right: 20px;
+}
+
+.plusminus input {
+  margin: 0;
+  width: 2em;
+  height: 2em;
+  font-size: 120%;
+}
+
 #timeline {
   width: 100%;
   position: fixed;
