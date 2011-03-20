@@ -12,6 +12,7 @@ class CreateVenues < ActiveRecord::Migration
       t.string :description
       t.integer :checkins_count
       t.string :origin
+      t.string :icon_url
 
       t.timestamps
     end
