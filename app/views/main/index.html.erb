@@ -8,6 +8,7 @@
 <%= javascript_include_tag "venues.js" %>
 <script type="text/javascript">
   var markers = new Array();
+  var search_timeout;
   
   $(initialize);
   
@@ -27,10 +28,11 @@
     var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
     
     // debug: do it only once, for testing.
-    all_venues_search(map.getCenter(), map);
-    
     google.maps.event.addListener(map, 'bounds_changed', function() {
-      //fsq_search(map.getCenter(), map);
+      clearTimeout(search_timeout);
+      search_timeout = setTimeout(function() {
+        all_venues_search(map.getCenter(), map);
+      }, 1000); // value "au bol", let's hope it's interactive enough :)
     });
   }
 </script>

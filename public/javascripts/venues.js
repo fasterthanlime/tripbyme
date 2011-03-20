@@ -1,5 +1,6 @@
 
 function all_venues_search(latLng, map) {
+  console.log("Doing all_venues_search");
   $("#result_items ul").html("");
   
   providers = ["gowalla", "foursquare", "eventful"]
