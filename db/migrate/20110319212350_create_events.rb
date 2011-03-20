@@ -9,6 +9,7 @@ class CreateEvents < ActiveRecord::Migration
       t.datetime :start_time
       t.datetime :stop_time
       t.string :description
+      t.string :origin
 
       t.timestamps
     end

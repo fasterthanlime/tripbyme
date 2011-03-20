@@ -11,6 +11,7 @@ class CreateVenues < ActiveRecord::Migration
       t.string :brightkite_id
       t.string :description
       t.integer :checkins_count
+      t.string :origin
 
       t.timestamps
     end

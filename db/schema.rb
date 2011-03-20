@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20110320082443) do
     t.datetime "start_time"
     t.datetime "stop_time"
     t.string   "description"
+    t.string   "origin"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -50,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20110320082443) do
     t.string   "brightkite_id"
     t.string   "description"
     t.integer  "checkins_count"
+    t.string   "origin"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
