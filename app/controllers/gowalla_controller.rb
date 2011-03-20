@@ -32,7 +32,11 @@ class GowallaController < ApplicationController
     #end
     
     #@results = JSON.pretty_generate(spots);
-    @results = spots;
+    #@results = spots;
+    #@results = spots.size;
+    @results = spots.map do |spot|
+      "Name: #{spot.name}, Category: #{spot.spot_categories.map do |item| item.name end}, Location: (#{spot.lat}, #{spot.lng}, Desc: #{spot.description}\n";
+    end
   end
 
 end
