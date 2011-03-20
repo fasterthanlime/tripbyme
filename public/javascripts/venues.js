@@ -86,10 +86,23 @@ function do_request(url, map) {
             
             markers[item.id] = new google.maps.Marker({
                 position: itemLocation,
-                map: map, 
+                map: map,
                 title: item.name,
                 icon: img_url,
             });
+            google.maps.event.addListener(markers[item.id], 'click', (function(ourItem) {
+              return function() {
+                var itemId = "li#venue_" + ourItem.id;
+                $(".ui-selected").removeClass("ui-selected");
+                $(itemId).addClass("ui-selected");
+                $.smoothScroll({
+                  scrollElement: $('#results'),
+                  scrollTarget: itemId
+                });
+                
+                updatePlusMinus();
+              }
+            })(item));
           }
           
           // add it to our tour (mostly for debug)
