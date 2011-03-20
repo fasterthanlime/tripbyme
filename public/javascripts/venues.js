@@ -55,11 +55,9 @@ function do_request(url, map) {
           var item = items[i].venue;
           var img_url = "/images/unknown-place-icon.png";
           
-          /*
-          if(item.categories.hasOwnProperty(0)) {
-              img_url = item.categories[0].icon;
+          if(item.icon_url != null) {
+              img_url = item.icon_url;
           }
-          */
           
           var itemLocation = new google.maps.LatLng(item.lat, item.lng);
           
