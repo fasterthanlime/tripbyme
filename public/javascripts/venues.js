@@ -6,6 +6,14 @@ function clear_items() {
   }
   markers = [];
 }
+// Add a leading '0' if string is only 1 char
+function stringPad(str) {
+    var newStr = "" + str;
+    if (newStr.length == 1) {
+        newStr = "0" + newStr;
+    }
+    return newStr;
+} 
 
 function all_venues_search(latLng, map, collect_data) {
   // remove old results and old map markers
@@ -84,7 +92,14 @@ function do_request(url, map) {
             list.append("<li class='venue' data-name='" + item.name + "' data-lat='" + item.lat + "' data-lng='" +
               item.lng + "' id='venue_" + item.id + "'><h2><img src='" + img_url + "'> " + item.name +
             "<div class='plusminus'><input class='plus' type='button' value='+'></input><input class='minus' type='button' value='-'></input></div></h2></li>");
-            
+       
+            $("li#venue_" + item.id + " .plus").click(function() {
+                var venue = $(this).closest(".venue");
+                    var uri = generateCalendarURI(venue.attr("data-name"), getUTCDateString(), getUTCDateString(), "(" + venue.attr("data-lat") + ", " + venue.attr("data-lng") + ")", " Enter your event here");
+                window.open(uri);
+            });
+
+     
             markers[item.id] = new google.maps.Marker({
                 position: itemLocation,
                 map: map,
@@ -106,18 +121,14 @@ function do_request(url, map) {
               }
             })(item));
             
-            $(".plus").click(function() {
-              var venue = $(this).closest(".venue");
-              var uri = generateCalendarURI(venue.attr("name"), 0, 0, venue.attr("data-lat"), venue.attr("data-lng"), "Enter your event here");
-              window.open(uri);
-            })
           }
           
           // add it to our tour (mostly for debug)
           //tourPlanCoordinates.push(itemLocation);
         }
       }
-      
+
+            
       /*
       // Polyline example code:
       var tour = new google.maps.Polyline({

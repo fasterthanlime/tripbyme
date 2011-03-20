@@ -1,3 +1,14 @@
+// Converts the given time into UTC, returns this in a string
+function getUTCDateString() {
+    var timeObj = new Date();
+    var dateStr = "" + timeObj.getUTCFullYear();
+    dateStr += stringPad(timeObj.getUTCMonth()+1);
+    dateStr += stringPad(timeObj.getUTCDate());
+    dateStr += "T" + stringPad(timeObj.getUTCHours());
+    dateStr += stringPad(timeObj.getUTCMinutes()) + "00Z";
+    return dateStr;
+} 
+
 function generateCalendarURI(name, start_time, stop_time, lat, lng, description) {
     sname = encodeURI(name);
     sdates = encodeURI(start_time + "/" + stop_time);
