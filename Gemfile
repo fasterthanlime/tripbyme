@@ -6,11 +6,12 @@ gem 'rails', '3.0.5'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
-
 gem 'httpclient'
 
 gem 'json'
 
+# Providers (note: foursquare is done manually <3)
+gem 'gowalla'
 gem 'eventfulapi'
 
 # Use unicorn as the web server

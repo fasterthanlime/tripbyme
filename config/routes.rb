@@ -1,4 +1,6 @@
 DemoApp::Application.routes.draw do
+  get "gowalla/search"
+
   resources :events
   resources :venues
   get "eventful/search"

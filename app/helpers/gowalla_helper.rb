@@ -1,0 +1,2 @@
+module GowallaHelper
+end

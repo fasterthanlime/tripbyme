@@ -16,9 +16,9 @@ class EventfulController < ApplicationController
   
     results = eventful.call 'venues/search',
                             :location  => "#{@lat},#{@lng}",
-                            :within => 10,
+                            :within => 50,
                             :units => "km",
-                            :page_size => 20,
+                            :page_size => 30,
                             :date => "future"
                             
     # Cache venue into DB :)
