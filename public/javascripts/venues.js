@@ -1,23 +1,28 @@
 
-function trim_items() {
+function clear_items() {
   for(var i in markers) {
-    if(markers.hasOwnProperty(i)) {
-      markers[i].setMap(null);
-      markers.splice(i, 1);
-    }
+    markers[i].setMap(null);
+    $("li#venue_" + i).remove();
   }
+  markers = [];
 }
 
 function all_venues_search(latLng, map, collect_data) {
   // remove old results and old map markers
+  var toSplice = [];
+  
   for(var i in markers) {
     if(markers.hasOwnProperty(i)) {
       if(!map.getBounds().contains(markers[i].getPosition())) {
         markers[i].setMap(null);
-        markers.splice(i, 1);
-        $("#venue_" + i).remove();
+        $("li#venue_" + i).remove();
+        toSplice.push(i);
       }
     }
+  }
+  
+  for(var i in toSplice.reverse()) {
+    markers.splice(i, 1);
   }
   
   //providers = ["gowalla", "foursquare", "eventful"]
@@ -71,12 +76,14 @@ function do_request(url, map) {
           
           var itemLocation = new google.maps.LatLng(item.lat, item.lng);
           
-          // add item to item list
-          list.append("<li id='venue_" + item.id + "'><h2><img src='" + img_url + "'> " + item.name +
-            "<div class='plusminus'><input type='button' value='+'></input><input type='button' value='-'></input></div></h2></li>");
+          //$("#result_items ul li div input .plus")
           
           // add marker on the map
           if(markers[item.id] == null) {
+            // add item to item list
+            list.append("<li id='venue_" + item.id + "'><h2><img src='" + img_url + "'> " + item.name +
+            "<div class='plusminus'><input class='plus' type='button' value='+'></input><input class='minus' type='button' value='-'></input></div></h2></li>");
+            
             markers[item.id] = new google.maps.Marker({
                 position: itemLocation,
                 map: map, 

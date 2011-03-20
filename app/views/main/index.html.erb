@@ -9,13 +9,14 @@
 <script type="text/javascript">
   var markers = new Array();
   var search_timeout;
+  var category_blacklist = [];
   
   $(initialize);
   
   function initialize() {
     
-    // Default location = lausanne :)
-    var latlng = new google.maps.LatLng(46.529816, 6.630592);
+    // Default location = EPFL, Ecublens VD :)
+    var latlng = new google.maps.LatLng(46.520958,6.565704);
     var myOptions = {
       zoom: 16,
       center: latlng,
@@ -27,7 +28,6 @@
     };
     var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
     
-    // debug: do it only once, for testing.
     google.maps.event.addListener(map, 'bounds_changed', function() {
       clearTimeout(search_timeout);
       search_timeout = setTimeout(function() {
@@ -36,7 +36,7 @@
     });
     
     google.maps.event.addListener(map, 'zoom_changed', function() {
-      trim_items();
+      clear_items();
     });
   }
 </script>
@@ -49,15 +49,18 @@
 </div>
 
 <div id="location">
-<div id="results">
-  <div id="result_items">
-      <!--
-  <div id="search_container">
-    <input id="searchbox" type="text" value="Search..." placeholder="Search..."></input>
+  <div id="results">
+    <div id="result_items">
+        <!--
+    <div id="search_container">
+      <input id="searchbox" type="text" value="Search..." placeholder="Search..."></input>
+    </div>
+    -->
+    <ul></ul>
+    </div>
   </div>
-  -->
-  <ul></ul>
-  </div>
+  <div class="map" id="map_container"><div id="map_canvas"></div></div>
 </div>
-<div class="map" id="map_container"><div id="map_canvas"></div></div>
-</div>
+
+<div id="footer">&#169; 2011 planaday.ch - <a href="/info/wip" target="_blank">more info</a></div>
+
