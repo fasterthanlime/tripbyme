@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(:version => 20110319212350) do
     t.string   "eventful_id"
     t.datetime "start_time"
     t.datetime "stop_time"
+    t.string   "category"
+    t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -37,6 +39,11 @@ ActiveRecord::Schema.define(:version => 20110319212350) do
     t.float    "lng"
     t.string   "foursquare_id"
     t.string   "eventful_id"
+    t.string   "gowalla_id"
+    t.string   "places_id"
+    t.string   "brightkite_id"
+    t.string   "category"
+    t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
