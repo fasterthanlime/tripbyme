@@ -1,4 +1,13 @@
 
+function trim_items() {
+  for(var i in markers) {
+    if(markers.hasOwnProperty(i)) {
+      markers[i].setMap(null);
+      markers.splice(i, 1);
+    }
+  }
+}
+
 function all_venues_search(latLng, map, collect_data) {
   // remove old results and old map markers
   for(var i in markers) {
@@ -49,7 +58,7 @@ function do_request(url, map) {
       
       list = $("#result_items ul");
       
-      //var tourPlanCoordinates = new Array();
+      //var tourPlanCoordinates = [];
       
       for(var i in items) {
         if(items.hasOwnProperty(i)) {
