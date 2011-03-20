@@ -51,7 +51,7 @@ body { height: 100%; margin: 0; padding: 0; background-color: #fff; }
 
 #results {
   background-color: #fff;
-  color: #222;
+  color: #444;
   margin-left: 66%;
   width: 34%;
   overflow-x: hidden;
@@ -67,7 +67,8 @@ body { height: 100%; margin: 0; padding: 0; background-color: #fff; }
 }
 
 #result_items ul {
-  margin-top: 50px;
+  /* debug: put it back when enabling the search box */
+  /* margin-top: 50px; */
 }
 
 #result_items ul li {
