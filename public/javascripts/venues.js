@@ -1,5 +1,5 @@
 
-function all_venues_search(latLng, map) {
+function all_venues_search(latLng, map, collect_data) {
   // remove old results and old map markers
   for(var i in markers) {
     if(markers.hasOwnProperty(i)) {
@@ -19,16 +19,16 @@ function all_venues_search(latLng, map) {
     }
   }
   
-  /*
-  for(var i in providers) {
-    if(providers.hasOwnProperty(i)) {
-      // then do actual queries to the provider if needed (for additional info)
-      setTimeout(function() {
-        venues_search(providers[i], latLng, map, false);
-      }, 500);
-    }
+  if(collect_data) {
+    setTimeout(function() {
+      for(var i in providers) {
+        if(providers.hasOwnProperty(i)) {
+          // then do actual queries to the provider if needed (for additional info)
+          venues_search(providers[i], latLng, map, false);
+        }
+      }
+    }, 500);
   }
-  */
 }
 
 function venues_search(provider, latLng, map, only_cache) {  

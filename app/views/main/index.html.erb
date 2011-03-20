@@ -31,7 +31,7 @@
     google.maps.event.addListener(map, 'bounds_changed', function() {
       clearTimeout(search_timeout);
       search_timeout = setTimeout(function() {
-        all_venues_search(map.getCenter(), map);
+        all_venues_search(map.getCenter(), map, <%= @collect_data %>);
       }, 200); // value "au bol", let's hope it's interactive enough :)
     });
   }
