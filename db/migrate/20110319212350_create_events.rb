@@ -8,7 +8,6 @@ class CreateEvents < ActiveRecord::Migration
       t.string :eventful_id
       t.datetime :start_time
       t.datetime :stop_time
-      t.string :category
       t.string :description
 
       t.timestamps

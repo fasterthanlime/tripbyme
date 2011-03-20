@@ -10,7 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110319212350) do
+ActiveRecord::Schema.define(:version => 20110320082443) do
+
+  create_table "categories", :force => true do |t|
+    t.string   "name"
+    t.string   "icon"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "events", :force => true do |t|
     t.string   "name"
@@ -20,7 +27,6 @@ ActiveRecord::Schema.define(:version => 20110319212350) do
     t.string   "eventful_id"
     t.datetime "start_time"
     t.datetime "stop_time"
-    t.string   "category"
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -42,8 +48,8 @@ ActiveRecord::Schema.define(:version => 20110319212350) do
     t.string   "gowalla_id"
     t.string   "places_id"
     t.string   "brightkite_id"
-    t.string   "category"
     t.string   "description"
+    t.integer  "checkins_count"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

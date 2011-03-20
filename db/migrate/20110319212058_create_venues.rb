@@ -9,8 +9,8 @@ class CreateVenues < ActiveRecord::Migration
       t.string :gowalla_id
       t.string :places_id
       t.string :brightkite_id
-      t.string :category
       t.string :description
+      t.integer :checkins_count
 
       t.timestamps
     end
