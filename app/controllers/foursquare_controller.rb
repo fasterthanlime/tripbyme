@@ -82,7 +82,7 @@ class FoursquareController < ApplicationController
     
     result = []
     
-    Venue.where("origin = ? AND lat > ? AND lng > ? AND lat < ? AND lng < ?", ORIGIN, sw_lat, sw_lng, ne_lat, ne_lng).each do |item|
+    Venue.where("origin = ? AND lat > ? AND lng > ? AND lat < ? AND lng < ?", ORIGIN, sw_lat, sw_lng, ne_lat, ne_lng).order("checkins_count").limit(30).each do |item|
       result.push(item)
     end
     

@@ -11,7 +11,8 @@ function all_venues_search(latLng, map, collect_data) {
     }
   }
   
-  providers = ["gowalla", "foursquare", "eventful"]
+  //providers = ["gowalla", "foursquare", "eventful"]
+  providers = ["foursquare"]
   for(var i in providers) {
     if(providers.hasOwnProperty(i)) {
       // do only with cache first
