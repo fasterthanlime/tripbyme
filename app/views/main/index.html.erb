@@ -32,7 +32,7 @@
       clearTimeout(search_timeout);
       search_timeout = setTimeout(function() {
         all_venues_search(map.getCenter(), map, <%= @collect_data %>);
-      }, 300); // value "au bol", let's hope it's interactive enough :)
+      }, 100); // value "au bol", let's hope it's interactive enough :)
     });
     
     google.maps.event.addListener(map, 'zoom_changed', function() {
