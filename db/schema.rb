@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(:version => 20110320082443) do
     t.string   "description"
     t.integer  "checkins_count"
     t.string   "origin"
+    t.string   "icon_url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
