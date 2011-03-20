@@ -6,7 +6,11 @@
     <th>Lat</th>
     <th>Lng</th>
     <th>Foursquare</th>
-    <th>Eventful</th>
+    <th>Eventful ID</th>
+    <th>Gowalla ID</th>
+    <th>Places ID</th>
+    <th>BrightKite ID</th>
+    <th>Checkins count</th>
     <th></th>
     <th></th>
     <th></th>
@@ -19,6 +23,10 @@
     <td><%= venue.lng %></td>
     <td><%= venue.foursquare_id %></td>
     <td><%= venue.eventful_id %></td>
+    <td><%= venue.gowalla_id %></td>
+    <td><%= venue.places_id %></td>
+    <td><%= venue.brightkite_id %></td>
+    <td><%= venue.checkins_count %></td>
     <td><%= link_to 'Show', venue %></td>
     <td><%= link_to 'Edit', edit_venue_path(venue) %></td>
     <td><%= link_to 'Destroy', venue, :confirm => 'Are you sure?', :method => :delete %></td>

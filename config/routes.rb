@@ -1,14 +1,13 @@
 DemoApp::Application.routes.draw do
   resources :categories
-
-  get "gowalla/search"
-
   resources :events
   resources :venues
-  get "eventful/search"
-  get "foursquare/search"
-  root :to => "foursquare", :action => "search"
 
+  get "foursquare/search"
+  get "gowalla/search"
+  get "eventful/search"
+
+  root :to => "main", :action => "index"
 
   resources :users
 

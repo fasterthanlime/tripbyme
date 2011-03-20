@@ -1,6 +1,14 @@
 require 'rubygems'
 require 'eventful/api'
 
+# Eventful request limits:
+#
+# The amount of the rate limit is 30,000 API calls per day.
+# API calls to add an event, venue, performer or demand have
+# no limit and are not included in your daily API call count.
+#
+# Please contact bizdev@eventful.com for waivers to this rate limit.
+
 class EventfulController < ApplicationController
   def search
     if params[:lat] == nil then
@@ -11,12 +19,13 @@ class EventfulController < ApplicationController
       @lat = params[:lat]
       @lng = params[:lng]
     end
-    
+
+    # Our secret API key
     eventful = Eventful::API.new 'w2FxtHT976wb8g4F'
   
     results = eventful.call 'venues/search',
                             :location  => "#{@lat},#{@lng}",
-                            :within => 50,
+                            :within => 20,
                             :units => "km",
                             :page_size => 30,
                             :date => "future"
@@ -25,8 +34,10 @@ class EventfulController < ApplicationController
     results["venues"]["venue"].each do |item|
       venue = Venue.new(
         :name => item["name"],
+        :description => item["description"],
         :lat => item["latitude"].to_f,
         :lng => item["longitude"].to_f,
+        :type => "evdb",
         :eventful_id => item["id"]
       )
       venue.save
